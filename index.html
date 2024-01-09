@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>다소니 심리상담센터</title>
+		<link rel="stylesheet" href="./lib/setup.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
+		/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+			integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+			crossorigin="anonymous"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+		<script src="./lib/jquery.js"></script>
+
+		<style>
+			body {
+				font-family: 'NanumSquare';
+				word-break: keep-all;
+			}
+			header {
+				position: relative;
+			}
+			header > .logo {
+				width: 252px;
+				height: 50px;
+				background-image: url(./img/logo.png);
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: 0 0;
+
+				margin: 25px 0;
+			}
+
+			header nav {
+				background-image: url(./img/header_line.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				background-size: 100% 2px;
+				padding-top: 2px;
+			}
+			header nav .menu {
+				position: relative;
+				border-bottom: 1px solid #ccc;
+			}
+			header nav .menu .grid {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				grid-gap: 0;
+			}
+			header nav .menu .grid li {
+				width: 100%;
+			}
+			header nav .menu .grid > li > a {
+				font-size: 16px;
+				width: 100%;
+				padding: 16px 0;
+				font-weight: bold;
+			}
+			header nav .menu .menubox {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 100%;
+
+				background-image: url(./img/header_line.png);
+				background-repeat: no-repeat;
+				background-size: 100% 2px;
+				background-position: 0 0;
+				background-color: white;
+
+				max-height: 0px;
+				overflow: hidden;
+				transition: 1s;
+				z-index: 100;
+			}
+			header nav .menu:hover .menubox {
+				max-height: 500px;
+			}
+			header nav .menu .menubox .grid {
+				padding: 20px 0;
+			}
+			header nav .menu .menubox .grid li {
+				padding: 10px 0;
+			}
+			header nav .menu .menubox .grid li a {
+				font-size: 16px;
+			}
+			header nav .menu .menubox .grid li a:hover {
+				background-image: url(./img/menu_hover.png);
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: 1px 0px;
+				padding: 0 10px;
+			}
+
+			header .mobile {
+			}
+			header .mobile .button {
+				width: 40px;
+				height: 40px;
+
+				position: absolute;
+				top: 50%;
+				right: 15px;
+				transform: translateY(-50%);
+				cursor: pointer;
+			}
+			header .mobile .button span {
+				background-color: black;
+				width: 30px;
+				height: 2px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			header .mobile .button span:first-child {
+				top: 25%;
+			}
+			header .mobile .button span:last-child {
+				top: 75%;
+			}
+
+			header .mobile .sidemenu {
+				width: 250px;
+				height: 100vh;
+				position: fixed;
+				top: 0;
+				right: 0;
+				transform: translateX(100%);
+				background-color: white;
+				z-index: 9999;
+				transition: 1s;
+			}
+			header .mobile.view .sidemenu {
+				transform: translateX(0);
+			}
+			header .mobile .sidemenu .logo {
+				background-image: url(./img/logo.png);
+				background-repeat: no-repeat;
+				background-size: 70%;
+				background-position: center;
+				width: 100%;
+				height: 50px;
+				padding: 40px 0px;
+			}
+			header .mobile .sidemenu .close {
+				width: 35px;
+				height: 35px;
+				position: absolute;
+				top: 15px;
+				left: -45px;
+				cursor: pointer;
+				transform: translateX(130%);
+				opacity: 0;
+				transition: opacity 0.1s, transform 0s 0.1s;
+			}
+			header .mobile.view .sidemenu .close {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			header .mobile .sidemenu .close span {
+				width: 30px;
+				height: 2px;
+				background-color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			header .mobile .sidemenu .close span:first-child {
+				transform: translate(-50%, -50%) rotate(45deg);
+			}
+			header .mobile .sidemenu .close span:last-child {
+				transform: translate(-50%, -50%) rotate(135deg);
+			}
+			header .mobile .sidemenu .list {
+				background-image: url(./img/header_line.png);
+				background-repeat: no-repeat;
+				background-size: 100% 2px;
+			}
+			header .mobile .sidemenu .list li {
+				width: 100%;
+				text-align: left;
+			}
+			header .mobile .sidemenu .list li span {
+				font-size: 16px;
+				border-bottom: 1px solid #ccc;
+				display: inline-block;
+				width: 100%;
+				line-height: 42px;
+				padding: 5px 0 0 15px;
+			}
+			header .mobile .sidemenu .list li ul {
+				background-color: #f9f9f9;
+				max-height: 0;
+				overflow: hidden;
+				transition: 1s;
+			}
+			header .mobile .sidemenu .list li.view ul {
+				max-height: 500px;
+			}
+			header .mobile .sidemenu .list li ul li {
+			}
+			header .mobile .sidemenu .list li ul li a {
+				width: 100%;
+				font-size: 12px;
+				padding: 8px 15px;
+			}
+			header .mobile .menubg {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				background-color: #000c;
+				z-index: 99;
+				transform: translateX(100%);
+				opacity: 0;
+				transition: opacity 1s 0s, transform 0s 1s;
+			}
+			header .mobile.view .menubg {
+				transform: translateX(0);
+				opacity: 1;
+				transition: opacity 1s 0s, transform 0s 0s;
+			}
+
+			main #home {
+			}
+			main #home .slider {
+				width: 100%;
+				height: 840px;
+			}
+			main #home .slider .swiper-slide {
+				text-align: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			main #home .slider .swiper-slide .box {
+				background-image: url(./img/main_txt_box.png);
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				background-position: center;
+				width: 636px;
+				height: 296px;
+
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			main #home .slider .swiper-slide .box .title {
+				width: 90%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			main #home .slider .swiper-slide .box .title .name {
+				font-size: 46px;
+				font-weight: 800;
+				transform: translateY(70%);
+				opacity: 0;
+				transition: 2s;
+			}
+			main #home .slider .swiper-slide .box .title .sub {
+				font-size: 18px;
+				font-weight: bold;
+				margin-top: 20px;
+				transform: translateY(70%);
+				opacity: 0;
+				transition: 2s 1s;
+			}
+			main #home .slider .swiper-slide.swiper-slide-active .box .title .name,
+			main #home .slider .swiper-slide.swiper-slide-active .box .title .sub {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+
+			main #home .slider .swiper-slide.p1 {
+				background-image: url(./img/main_visual.jpg);
+			}
+			main #home .slider .swiper-slide.p2 {
+				background-image: url(./img/main_visual2.jpg);
+			}
+			main #home .slider .swiper-slide.p3 {
+				background-image: url(./img/main_visual3.jpg);
+			}
+
+			/* main #home .slider .swiper-slide .boxx {
+				width: 100%;
+				height: 20%;
+			}
+			main #home .slider .swiper-slide .boxx .boxxn {
+				font-size: 20px;
+				width: 100%;
+				height: 50%;
+				line-height: 90px;
+				transform: rotate(360deg);
+				transition: 4.5s;
+			}
+			main #home .slider .swiper-slide .boxx .boxxs {
+				font-size: 20px;
+				width: 100%;
+				height: 50%;
+				line-height: 90px;
+				transform: translateY(70%);
+				transition: 1s;
+			}
+			main #home .slider .swiper-slide.swiper-slide-active .boxx .boxxn {
+				transform: rotate(0deg);
+			}
+			main #home .slider .swiper-slide.swiper-slide-active .boxx .boxxs {
+				transform: translateY(0);
+			} */
+
+			main .section {
+				width: 100%;
+				padding: 60px 0;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			main .section .title {
+				padding: 40px 0;
+				transform: translateY(30%);
+				opacity: 0;
+				transition: 1s;
+			}
+			main .section.view .title {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			main .section .title .name {
+				font-size: 46px;
+				font-weight: bold;
+				padding: 22px 0;
+				color: #ff8f2b;
+			}
+			main .section .title .sub {
+				font-size: 16px;
+			}
+
+			main .section .grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				grid-gap: 5px;
+				border-top: 3px solid #ff8f2b;
+				transform: translateY(35%);
+				transition: 1s;
+				opacity: 0;
+			}
+			main .section.view .grid {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			main .section .grid > li {
+				background-color: white;
+				position: relative;
+				transform: translateY(25%);
+				opacity: 0;
+			}
+			main .section.view .grid > li {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			main .section .grid > li:nth-child(1) {
+				transition: 1s 0.2s;
+			}
+
+			main .section .grid > li:nth-child(2) {
+				transition: 1s 0.4s;
+			}
+
+			main .section .grid > li:nth-child(3) {
+				transition: 1s 0.6s;
+			}
+
+			main .section .grid > li:nth-child(4) {
+				transition: 1s 0.8s;
+			}
+			main .section.page2 .grid > li:nth-child(5) {
+				transition: 1s 1s;
+			}
+
+			main .section .grid li .boxtitle {
+				padding: 30px 0 30px;
+			}
+			main .section .grid li .boxtitle .name {
+				width: 100%;
+				font-size: 20px;
+			}
+			main .section .grid li .boxtitle .img {
+				width: 100%;
+				padding: 20px 0 40px;
+			}
+			main .section .grid li .boxtitle .button {
+				width: 100px;
+				height: 35px;
+				border-radius: 20px;
+				background-color: #ff8f2b;
+				border: 1px solid #ff8f2b;
+				position: absolute;
+				bottom: 27px;
+				left: 50%;
+				transform: translateX(-50%);
+				transition: 0.5s;
+			}
+			main .section .grid li .boxtitle .button a {
+				width: 100%;
+				line-height: 35px;
+				color: white;
+			}
+			main .section .grid li.box1 {
+				background-color: #ff8f2b;
+				color: white;
+			}
+			main .section .grid li.box1 ul .button {
+				background-color: white;
+				border: 1px solid white;
+			}
+			main .section .grid li.box1 ul .button a {
+				color: #ff8f2b;
+			}
+
+			main .section.page1 {
+				background-image: url(./img/sec1_bg.jpg);
+			}
+			main .section.page1 .grid li .boxtitle .button:hover {
+				background-color: white;
+			}
+			main .section.page1 .grid li .boxtitle .button a:hover {
+				color: #ff8f2b;
+			}
+			main .section.page1 .grid li.box1 ul .button:hover {
+				background-color: #ff8f2b;
+			}
+			main .section.page1 .grid li.box1 ul .button a:hover {
+				color: white;
+			}
+
+			main .section.page2 {
+				background-image: url(./img/sec2_bg.jpg);
+			}
+			main .section.page2 .title .name {
+				color: black;
+			}
+			main .section.page2 .grid {
+				grid-template-columns: repeat(5, 1fr);
+				grid-gap: 7px;
+				border-top: none;
+			}
+			main .section.page2 .grid a {
+				width: 100%;
+				border: 1px solid white;
+			}
+			main .section.page2 .grid a:hover {
+				border: 1px solid black;
+			}
+
+			main .section.page3 {
+				background-image: url(./img/sec3_bg.jpg);
+			}
+			main .section.page3 .title .name {
+				color: #65b07e;
+			}
+			main .section.page3 .grid {
+				border-top: 3px solid #65b07e;
+			}
+			main .section.page3 .grid li .boxtitle .button {
+				background-color: #65b07e;
+				border: 1px solid #65b07e;
+			}
+			main .section.page3 .grid li .boxtitle .button:hover {
+				background-color: white;
+			}
+			main .section.page3 .grid li .boxtitle .button a:hover {
+				color: #65b07e;
+			}
+			main .section.page3 .grid li.box1 {
+				background-color: #65b07e;
+				color: white;
+			}
+			main .section.page3 .grid li.box1 ul .button {
+				background-color: white;
+				border: 1px solid white;
+			}
+			main .section.page3 .grid li.box1 ul .button:hover {
+				background-color: #65b07e;
+			}
+			main .section.page3 .grid li.box1 ul .button a {
+				color: #65b07e;
+			}
+			main .section.page3 .grid li.box1 ul .button a:hover {
+				color: white;
+			}
+			main .section.page3 .grid li .boxtitle .img {
+				padding: 25px 0 55px;
+			}
+
+			main .section.page4 {
+				background-image: url(./img/sec4_bg.jpg);
+			}
+			main .section.page4 .title {
+				width: 500px;
+				transform: translateX(-20%);
+				transition: 1s;
+			}
+			main .section.page4.view .title {
+				transform: translateX(0%);
+			}
+			main .section.page4 .title .name {
+				color: #4f3a53;
+				font-size: 32px;
+				padding: 15px 0;
+			}
+			main .section.page4 .title .sub {
+				width: 100%;
+			}
+			main .section.page4 .title .button {
+				display: inline-block;
+				width: 100px;
+				height: 38px;
+				border-radius: 20px;
+				background-color: #4f3a53;
+				border: 1px solid #4f3a53;
+				margin-top: 40px;
+				transition: 0.5s;
+				color: white;
+				line-height: 36px;
+			}
+			main .section.page4 .title .button:hover {
+				background-color: white;
+				color: #4f3a53;
+			}
+
+			main #board {
+			}
+			main #board .grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				grid-gap: 60px;
+				padding: 60px 0;
+			}
+			main #board .grid > li {
+				transform: translateX(-30%);
+				opacity: 0;
+				transition: 1s;
+			}
+			main #board .grid > li.info {
+				transition: 1s 0.2s;
+			}
+			main #board.view .grid > li {
+				transform: translateX(0);
+				opacity: 1;
+			}
+			main #board .grid .title {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				position: relative;
+				cursor: pointer;
+			}
+			main #board .grid .title:hover .button span {
+				transform: rotate(180deg);
+			}
+			main #board .grid .title:hover .button span:first-child {
+				transform: rotate(270deg);
+			}
+			main #board .grid .title .name {
+				font-size: 20px;
+				color: #65b07e;
+				font-weight: bold;
+			}
+			main #board .grid .info .title .name {
+				color: #ff8f2b;
+			}
+			main #board .grid .title .button {
+				width: 30px;
+				height: 30px;
+			}
+			main #board .grid .title .button a {
+				width: 100%;
+			}
+			main #board .grid .title .button span {
+				background-color: #65b07e;
+				width: 20px;
+				height: 2px;
+				position: absolute;
+				top: 50%;
+				right: 10px;
+				transition: 0.5s;
+			}
+			main #board .grid .info .title .button span {
+				background-color: #ff8f2b;
+			}
+			main #board .grid .title .button span:first-child {
+				transform: rotate(90deg);
+			}
+			main #board .grid .list {
+				padding: 25px 0 0;
+			}
+			main #board .grid .list li {
+				width: 100%;
+				padding: 10px 0;
+			}
+			main #board .grid .list li a {
+				display: grid;
+				grid-template-columns: 1fr 100px;
+				width: 100%;
+				text-align: left;
+			}
+			main #board .grid .list li .date {
+				text-align: center;
+			}
+			main #board .grid .notice .list li a .text {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			main #board .grid .list li a:hover .text {
+				text-decoration: underline;
+			}
+
+			footer {
+				background-color: #222;
+				padding: 60px 0;
+			}
+			footer .flex {
+			}
+			footer .flex img {
+			}
+			footer .flex .text {
+				font-size: 12px;
+				line-height: 28px;
+				color: white;
+				text-align: left;
+			}
+			footer .flex .sns {
+			}
+			footer .flex .sns a {
+				width: 30px;
+				height: 30px;
+				background-color: #ccc;
+			}
+
+			.br {
+				display: none;
+			}
+			@media only screen and (min-width: 100px) and (max-width: 1200px) {
+				main #home .slider {
+					height: 700px;
+				}
+			}
+			@media only screen and (min-width: 100px) and (max-width: 1000px) {
+				main .section .grid {
+					grid-template-columns: repeat(2, 1fr);
+					grid-gap: 7px;
+					margin: 0 40px;
+				}
+				main .section.page2 .grid {
+					grid-template-columns: repeat(1, 1fr);
+				}
+				main .section.page2 .grid li .boxtitle {
+					padding: 0px 0 0px;
+				}
+				main .section.page2 .grid li .boxtitle .name {
+					width: 40%;
+					font-size: 14px;
+					line-height: 100px;
+				}
+				main .section.page2 .grid li .boxtitle .img {
+					width: 20%;
+					padding: 20px 0 20px;
+				}
+			}
+			@media only screen and (min-width: 100px) and (max-width: 800px) {
+				main #home .slider {
+					height: 400px;
+				}
+				main #home .slider .swiper-slide .box {
+					width: 90%;
+				}
+				main #home .slider .swiper-slide .box .title {
+					width: 80%;
+				}
+				main #home .slider .swiper-slide .box .title .name {
+					font-size: 38px;
+				}
+				main #home .slider .swiper-slide .box .title .sub {
+					font-size: 15px;
+					font-weight: 500;
+				}
+
+				main .section.page4 {
+					background-size: 120%;
+					background-position: 0% 100%;
+					background-color: #ece6e6;
+				}
+				main .section.page4 .title {
+					width: 100%;
+					padding: 80px 0;
+				}
+				main .section.page4 .title .name {
+					font-size: 40px;
+				}
+				main .section.page4 .title .sub .br {
+					display: block;
+				}
+
+				main #board .grid {
+					grid-template-columns: 1fr;
+					padding: 60px 40px;
+				}
+				footer .flex {
+					flex-direction: column;
+				}
+				footer .flex img {
+					padding-right: 15px;
+				}
+				footer .flex .text {
+					text-align: center;
+					order: 3;
+					line-height: 23px;
+				}
+				footer .flex .sns {
+					order: 2;
+					padding: 20px 0 15px;
+				}
+				footer .flex .br {
+					display: block;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<a href="#" class="logo"></a>
+			<nav>
+				<div class="pc">
+					<div class="menu">
+						<div class="wrap">
+							<ul class="grid">
+								<li><a href="#">ABOUT 다소니</a></li>
+								<li><a href="#">심리상담</a></li>
+								<li><a href="#">집단상담</a></li>
+								<li><a href="#">전문심리검사</a></li>
+								<li><a href="#">소통</a></li>
+							</ul>
+						</div>
+						<div class="menubox">
+							<div class="wrap">
+								<ul class="grid">
+									<li>
+										<ul>
+											<li><a href="#">인사말</a></li>
+											<li><a href="#">연혁</a></li>
+											<li><a href="#">오시는길</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+										</ul>
+									</li>
+									<li>
+										<ul>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+											<li><a href="#">성인심리상담</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div class="mobile">
+				<div class="button">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="sidemenu">
+					<a href="#" class="logo"></a>
+					<div class="close">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="list">
+						<ul>
+							<li>
+								<span>ABOUT 다소니</span>
+								<ul>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>심리상담</span>
+								<ul>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>집단상담</span>
+								<ul>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>전문심리검사</span>
+								<ul>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>소통</span>
+								<ul>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+									<li><a href="#">인사말</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="menubg"></div>
+			</div>
+		</header>
+
+		<main>
+			<div id="home">
+				<div class="swiper-container slider">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide p1">
+							<!-- <div class="boxx">
+								<div class="boxxn">2222</div>
+								<div class="boxxs">3333</div>
+							</div> -->
+							<div class="box">
+								<div class="title">
+									<div class="name">다소니 심리상담센터</div>
+									<div class="sub">
+										당신의 소중한 관계를, 표현하기 여러운 감정들을, 다양한 고민과 스트레스를, 따뜻한 상담과
+										전문적인 검사로 치유할 수 있게 도와드리겠습니다.
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide p2">
+							<div class="box">
+								<div class="title">
+									<div class="name">관계 테라피</div>
+									<div class="sub">
+										타인과의 관계 속에서 지치고 상처받은 마음을 <br />
+										관계테라피를 통해 보살필 수 있습니다.
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide p3">
+							<div class="box">
+								<div class="title">
+									<div class="name">청춘상담</div>
+									<div class="sub">
+										진로, 취업과 같은 현실적인 문제, 자존감, 정체성에 대한 문제, 내면의 문제처럼 혼자 해결하기
+										어려운 청춘들의 고민과 지친 마음을 들어드리고 있습니다.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="section page1">
+				<div class="wrap">
+					<div class="title">
+						<img src="./img/sec1_tit.png" alt="" />
+						<div class="name">다소니</div>
+						<div class="sub">다소니의 전문적인 상담과 검사가 필요하시다면?</div>
+					</div>
+					<ul class="grid">
+						<li>
+							<ul class="boxtitle">
+								<li class="name">심리상담예약신청</li>
+								<li class="img"><img src="./img/sec01_icon.png" alt="" /></li>
+								<li class="button"><a href="#">신청하기</a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="boxtitle">
+								<li class="name">집단상담예약신청</li>
+								<li class="img"><img src="./img/sec01_icon2.png" alt="" /></li>
+								<li class="button"><a href="#">신청하기</a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="boxtitle">
+								<li class="name">심리검사예약신청</li>
+								<li class="img"><img src="./img/sec01_icon3.png" alt="" /></li>
+								<li class="button"><a href="#">신청하기</a></li>
+							</ul>
+						</li>
+						<li class="box1">
+							<ul class="boxtitle">
+								<li class="name">비밀고민상담</li>
+								<li class="img"><img src="./img/sec01_icon4.png" alt="" /></li>
+								<li class="button"><a href="#">신청하기</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="section page2">
+				<div class="wrap">
+					<div class="title">
+						<img src="./img/sec2_tit.png" alt="" />
+						<div class="name">심리상담</div>
+						<div class="sub">
+							인간관계에서의 문제, 심리적 문제로 어려움을 겪고 계시는 분들에게<br />
+							전문적인 상담을 진행하며 효과적인 치료를 이어갑니다.
+						</div>
+					</div>
+					<ul class="grid">
+						<li>
+							<a href="#">
+								<ul class="boxtitle">
+									<li class="img"><img src="./img/sec02_icon.png" alt="" /></li>
+									<li class="name">관계테라피</li>
+								</ul>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<ul class="boxtitle">
+									<li class="img"><img src="./img/sec02_icon2.png" alt="" /></li>
+									<li class="name">청춘상담</li>
+								</ul>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<ul class="boxtitle">
+									<li class="img"><img src="./img/sec02_icon3.png" alt="" /></li>
+									<li class="name">아동심리상담</li>
+								</ul>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<ul class="boxtitle">
+									<li class="img"><img src="./img/sec02_icon4.png" alt="" /></li>
+									<li class="name">청소년심리상담</li>
+								</ul>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<ul class="boxtitle">
+									<li class="img"><img src="./img/sec02_icon5.png" alt="" /></li>
+									<li class="name">성인심리상담</li>
+								</ul>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="section page3">
+				<div class="wrap">
+					<div class="title">
+						<img src="./img/sec3_tit.png" alt="" />
+						<div class="name">전문심리검사</div>
+						<div class="sub">
+							전문심리검사를 통해 문제의 원인을 명확히 규명하여<br />
+							상담 목표를 설정하고 개입방향을 결정합니다.
+						</div>
+					</div>
+					<ul class="grid">
+						<li>
+							<ul class="boxtitle">
+								<li class="name">성인심리검사</li>
+								<li class="img"><img src="./img/sec03_icon.png" alt="" /></li>
+								<li class="button"><a href="#">검사안내</a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="boxtitle">
+								<li class="name">청소년심리검사</li>
+								<li class="img"><img src="./img/sec03_icon2.png" alt="" /></li>
+								<li class="button"><a href="#">검사안내</a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="boxtitle">
+								<li class="name">아동심리검사</li>
+								<li class="img"><img src="./img/sec03_icon3.png" alt="" /></li>
+								<li class="button"><a href="#">검사안내</a></li>
+							</ul>
+						</li>
+						<li class="box1">
+							<ul class="boxtitle">
+								<li class="name">신경심리평가</li>
+								<li class="img"><img src="./img/sec03_icon4.png" alt="" /></li>
+								<li class="button"><a href="#">검사안내</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="section page4">
+				<div class="wrap">
+					<div class="title">
+						<img src="./img/sec4_tit.png" alt="" />
+						<div class="name">집단상담</div>
+						<div class="sub">
+							다양한 사람들과의 상호작용을 통해 타인의 행동과 사고등을 탐색하며<br class="br" />
+							대인관계 능력과 대화방법 터득, 발달성장에 도움이 될 수 있습니다.
+						</div>
+						<a href="#" class="button">일정확인</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="board">
+				<div class="wrap">
+					<ul class="grid">
+						<li class="notice">
+							<div class="title">
+								<div class="name">공지사항</div>
+								<div class="button">
+									<a href="#">
+										<span></span>
+										<span></span>
+									</a>
+								</div>
+							</div>
+							<ul class="list">
+								<li>
+									<a href="#">
+										<div class="text">
+											성인종합심리평가 받고 "감성적,일기"도 득템하자! [감정다이어리 무료 제공]
+										</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">
+											[봄맞이 심리검사 할인 이벤트] 4월 한달 간 심리검사 BEST 4 할인 이벤트를 진행!
+										</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">
+											[미니웹툰] 더 나은 부부가 되기 위한 관계테라피 10화(마지막화)_ 이야기하는 건 정말 좋은
+											거야.
+										</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">
+											[미니웹툰] 더 나은 부부가 되기 위한 관계테라피 9화_다시 마주보게 된 부부
+										</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">
+											[미니웹툰] 더 나은 부부가 되기 위한 관계테라피 8화_제가 바라는 건 별 거 아니라구요...
+										</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="info">
+							<div class="title">
+								<div class="name">상담후기</div>
+								<div class="button">
+									<a href="#">
+										<span></span>
+										<span></span>
+									</a>
+								</div>
+							</div>
+							<ul class="list">
+								<li>
+									<a href="#">
+										<div class="text">아동심리평가</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">우울증 심리상담</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">성인남자 심리상담</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">심리상담</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="text">심리상담</div>
+										<div class="date">2021.05.10</div>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<div class="wrap">
+				<div class="flex">
+					<img src="./img/f_logo.png" alt="" />
+					<div class="text">
+						다소니 심리상담센터<br class="br" />
+						대표 : 김혜연<br />
+						사업자등록번호 : 684-82-00196<br class="br" />
+						통신판매업신고번호 : 제 2019-서울강동-1134호<br />
+						본점 : (우 05356) 서울시 강동구 진황도로119, 4층 (길동)<br />
+						TEL : 02-426-0982<br class="br" />
+						팩스 : 02-426-0983<br class="br" />
+						이메일 : mental0984@naver.com<br />
+						COPYRIGHT(C) 사회협동조합 공존 ALL RIGHTS RESERVERED<br />
+					</div>
+					<div class="sns">
+						<a href="#"></a>
+						<a href="#"></a>
+						<a href="#"></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+	<script>
+		var swiper = new Swiper('#home .slider', {
+			loop: true,
+
+			autoplay: {
+				delay: 4500,
+				disableOnInteraction: false,
+			},
+			effect: 'fade',
+		});
+
+		$(function () {
+			$('.mobile .button').on('click', function () {
+				$('header .mobile').addClass('view'); /*다시 닫는 버튼이 없음으로 toggle이 아닌 addClass*/
+			});
+
+			$('.mobile .close').on('click', function () {
+				$('.mobile').removeClass('view');
+			});
+
+			$('header .mobile .sidemenu .list li').on('click', function () {
+				const check = $(this).hasClass('view');
+
+				$('header .mobile .sidemenu .list li').removeClass('view');
+
+				if (!check) {
+					$(this).addClass('view');
+				}
+			});
+
+			/* window == 브라우저 자신 */
+			/* ,로 추가 */
+			let section = $('main .section, main #board');
+
+			$(window).scroll(function () {
+				const top = $(this).scrollTop();
+				//console.log(top);
+
+				section.each(function () {
+					/* pos = position*/
+					const pos = $(this).offset().top - 400;
+
+					/* top이 pos보다 커질 때*/
+					if (top > pos) {
+						$(this).addClass('view');
+					} else {
+						$(this).removeClass('view');
+					}
+				});
+			});
+		});
+	</script>
+</html>
